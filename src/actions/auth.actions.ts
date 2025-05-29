@@ -3,7 +3,7 @@
 import { prisma } from "@/db/prisma";
 import bcrypt from "bcryptjs";
 import { logEvent } from "@/utils/sentry";
-import { signAuthToken, setAuthCookie } from "@/lib/Auth";
+import { signAuthToken, setAuthCookie } from "@/lib/auth";
 
 type ResponseResult = {
   success: boolean;
@@ -58,13 +58,27 @@ export async function registerUser(
 
     // Sign and set auth token
     const token = await signAuthToken({ userId: user.id });
-    await setAuthCookie(token)
+    await setAuthCookie(token);
 
-    logEvent(`User registered successfuly: ${email}`, "auth", {userId: user.id, email}, "info")
+    logEvent(
+      `User registered successfuly: ${email}`,
+      "auth",
+      { userId: user.id, email },
+      "info"
+    );
 
-    return {success: true, message: "Registration"}
+    return { success: true, message: "Registration" };
   } catch (error) {
-    logEvent("unexpected error during registration", "auth", {}, "error", error)
-    return {success: false, message: "Something went wrong, please try again"}
+    logEvent(
+      "unexpected error during registration",
+      "auth",
+      {},
+      "error",
+      error
+    );
+    return {
+      success: false,
+      message: "Something went wrong, please try again",
+    };
   }
 }
