@@ -27,7 +27,7 @@ export async function createTicket(
     const ticket = await prisma.ticket.create({
       data: { subject, description, priority },
     });
-
+    
     logEvent(
       `Ticket created successfully: ${ticket.id}`,
       `ticket`,
