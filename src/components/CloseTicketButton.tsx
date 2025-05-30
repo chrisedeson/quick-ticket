@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useActionState, useEffect } from "react";
 import { closeTicket } from "@/actions/ticket.actions";
@@ -32,7 +32,7 @@ const CloseTicketButton = ({
       <input type="hidden" name="ticketId" value={ticketId} />
       <button
         type="submit"
-        className="bg-red-500 text-white px-3 w-full rounded hover:bg-red-600 transition"
+        className="bg-red-500 text-white px-3 py-3 w-full rounded hover:bg-red-600 transition"
       >
         Close Ticket
       </button>
